@@ -1,30 +1,40 @@
-print("This calculator only applies to self employed \
-people or people whose employer does not already take out tax \n")
+brackets = [18200, 45000, 135000, 190000]
+rates = [0.16, 0.3, 0.37, 0.45]
+lumps = [0, 4288, 31288, 51638] # extra 0 so that lump[3] lines up with the amount for bracket[3]
+medicare = 0.02
 
-income = int(input("How much did you earn last year? "))
-writeoff = int(input("How much was your tax offset? "))
-resident = input("Are you an Australian Resident? y/n ")
+def calc_tax(taxincome):
+    if taxincome > brackets[3]: # > 190k
+        tax = (taxincome - brackets[3]) * rates[3] + lumps[3]
 
-taxincome = income - writeoff
+    elif taxincome > brackets[2]: # > 135k but less than 190k
+        tax = (taxincome - brackets[2]) * rates[2] + lumps[2]
 
-if resident.lower() == "y":
-    if taxincome <= 18200:
-        print("You do not have to pay any tax")
-    elif taxincome <= 45000:
-        tax = 0.19 * (taxincome - 18200)
-    elif taxincome >= 45001 and taxincome <= 120000:
-        tax = 5092 + (0.325 * (taxincome - 45000))
-    elif taxincome >= 120001 and taxincome <= 180000:
-        tax = 29467 + (0.37 * (taxincome - 120000))
-    elif taxincome >= 180001:
-        tax = 51667 + (0.45 * (taxincome - 180000))
+    elif taxincome > brackets[1]: # > 45k less than 135k
+        tax = (taxincome - brackets[1]) * rates[1] + lumps[1]
 
-if resident.lower() == "n":
-    if taxincome <= 120000:
-        tax = 0.325 * taxincome
-    elif taxincome >= 120001 and taxincome <= 180000:
-        tax = 39000 + (0.37 * (taxincome - 120000))
-    elif taxincome >= 180001:
-        tax = 61200 + (0.45 * (taxincome - 180000))
+    elif taxincome > brackets[0]: # > 18200 less than 45k
+        tax = (taxincome - brackets[0]) * rates[0]
 
-print("Your tax owed is", "$" + str(tax))
+    else: # tax free
+        tax = 0
+
+    finaltax = tax + (taxincome * medicare)
+    return finaltax
+
+
+def main():
+    print("Updated for the 1st July 2024 Tax Cuts")
+    print("This calculator only applies to self employed people or people whose employer does not already take out tax \n")
+
+    income = int(input("How much did you earn last year? "))
+    writeoff = int(input("How much was your tax offset? "))
+
+    taxincome = income - writeoff
+    tax = calc_tax(taxincome)
+
+    print("Your tax owed is", "$" + str(tax))
+
+
+if __name__ == "__main__":
+    main()

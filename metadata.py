@@ -52,4 +52,6 @@ def main():
                 data = data.decode()
             print(f"{tag:25}: {data}")
             pass
-main()
+
+if __name__ == "__main__":
+    main()

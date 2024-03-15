@@ -54,4 +54,5 @@ def main():
     else:
         print("Non Prime Numbers:", ", ".join(nonprime))
 
-main()
+if __name__ == "__main__":
+    main()

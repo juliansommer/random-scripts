@@ -26,7 +26,6 @@ def main():
     nameinput = input("What do you want the files to be renamed to? ")
 
     full_list = [os.path.join(pathinput, i) for i in name_list]
-    #sorted_list = sorted(full_list, key=lambda x: os.path.getctime(x))
 
     for i in range(len(full_list)):
         extension = pathlib.Path(full_list[i]).suffix
@@ -35,4 +34,5 @@ def main():
         destination = os.path.join(pathinput, (nameinput + str(i) + extension))
         os.rename(source, destination)
 
-main()
+if __name__ == "__main__":
+    main()
