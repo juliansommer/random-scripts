@@ -14,11 +14,12 @@ root = tk.Tk()
 root.withdraw()
 root.attributes("-topmost", True) # Opened window will be above all other windows even if clicked off
 
+
 def main():
     print("Open the file: ")
     filename = filedialog.askopenfilenames(filetypes=[("PNG", ".png"), ( "JPG", ".jpg")])
 
-    if not len(filename) >= 1:  # they didnt select a folder
+    if len(filename) < 1:  # they didnt select a folder
         print("Invalid File \n")
         main()
 
@@ -40,7 +41,7 @@ def main():
 
     exifdata = image.getexif()
 
-    if not len(exifdata) >= 1:
+    if len(exifdata) < 1:
         print("No exif data")
     else:
         for tag_id in exifdata:
@@ -51,7 +52,7 @@ def main():
             if isinstance(data, bytes):
                 data = data.decode()
             print(f"{tag:25}: {data}")
-            pass
+
 
 if __name__ == "__main__":
     main()

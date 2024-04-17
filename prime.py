@@ -15,11 +15,12 @@ root.attributes("-topmost", True)  # Opened window will be above all other windo
 prime = []
 nonprime = []
 
+
 def main():
     print("Open the Number List")
     filename = filedialog.askopenfilenames(filetypes=[("Text", ".txt")])
 
-    if not len(filename) >= 1:  # they didnt select a file
+    if len(filename) < 1:  # they didnt select a file
         print("Invalid File \n")
         main()
 
@@ -41,8 +42,8 @@ def main():
         except ValueError:  # if there is a letter in document
             pass
 
-    sorted(prime)
-    sorted(nonprime)
+    prime = sorted(prime)
+    prime = sorted(nonprime)
 
     if len(prime) == 0:
         print("No Prime Numbers")
@@ -53,6 +54,7 @@ def main():
         print("No Non Prime Numbers")
     else:
         print("Non Prime Numbers:", ", ".join(nonprime))
+
 
 if __name__ == "__main__":
     main()

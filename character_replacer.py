@@ -36,15 +36,17 @@ options = {
     "z": ["z", "2"],
     "Z": ["Z", "2"]}
 
+
 def filler(word):
     combos = [(c,) if c not in options else options[c] for c in word]
     return ("".join(o) for o in product(*combos))
+
 
 def main():
     print("Open the Word List")
     filename = filedialog.askopenfilenames(filetypes=[("Text", ".txt")])
 
-    if not len(filename) >= 1:  # they didn't select a file
+    if len(filename) < 1:  # they didn't select a file
         print("Invalid File \n")
         main()
 
@@ -64,6 +66,7 @@ def main():
 
     directory_path = os.getcwd()
     print("Saved to " + directory_path + "\\NewList.txt")
+
 
 if __name__ == "__main__":
     main()
