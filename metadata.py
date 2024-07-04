@@ -1,30 +1,32 @@
-try:
-    from ctypes import windll
-    from PIL import Image
-    from PIL.ExifTags import TAGS
-    import tkinter as tk
-    from tkinter import filedialog
-except ImportError:
-    import Tkinter as tk
-    import tkFileDialog as filedialog
+import tkinter as tk
+from ctypes import windll
+from tkinter import filedialog
+
+from PIL import Image
+from PIL.ExifTags import TAGS
 
 windll.shcore.SetProcessDpiAwareness(1)  # fixes the blurry file dialog
 
 root = tk.Tk()
 root.withdraw()
-root.attributes("-topmost", True) # Opened window will be above all other windows even if clicked off
+root.attributes(
+    "-topmost", True
+)  # Opened window will be above all other windows even if clicked off
 
 
-def main():
-    print("Open the file: ")
-    filename = filedialog.askopenfilenames(filetypes=[("PNG", ".png"), ( "JPG", ".jpg")])
+def select_image() -> str:
+    print("Open The Image")
+    filename = filedialog.askopenfilenames(filetypes=[("PNG", ".png"), ("JPG", ".jpg")])
 
-    if len(filename) < 1:  # they didnt select a folder
-        print("Invalid File \n")
-        main()
+    # for whatever reaason, if you do not select a file the first time, then select one, theres some permission error so just exit
+    if len(filename) < 1:
+        print("Invalid File")
+        exit()
 
-    image = Image.open(str("".join(filename)))
+    return "".join(filename)
 
+
+def image_data(image: Image) -> None:
     info_dict = {
         "Filename": image.filename,
         "Image Size": image.size,
@@ -33,25 +35,34 @@ def main():
         "Image Format": image.format,
         "Image Mode": image.mode,
         "Image is Animated": getattr(image, "is_animated", False),
-        "Frames in Image": getattr(image, "n_frames", 1)
+        "Frames in Image": getattr(image, "n_frames", 1),
     }
 
-    for label,value in info_dict.items():
+    print("\nImage Information")
+    for label, value in info_dict.items():
         print(f"{label:25}: {value}")
 
-    exifdata = image.getexif()
 
-    if len(exifdata) < 1:
-        print("No exif data")
-    else:
-        for tag_id in exifdata:
-        # get the tag name, instead of human unreadable tag id
+def exif_data(image: Image) -> None:
+    exif = image.getexif()
+
+    if not len(exif) < 1:
+        print("\nEXIF Data:")
+        for tag_id in exif:
+            # get the tag name, instead of human unreadable tag id
             tag = TAGS.get(tag_id, tag_id)
-            data = exifdata.get(tag_id)
+            data = exif.get(tag_id)
             # decode bytes
             if isinstance(data, bytes):
                 data = data.decode()
             print(f"{tag:25}: {data}")
+
+
+def main() -> None:
+    filename = select_image()
+    image = Image.open(filename)
+    image_data(image)
+    exif_data(image)
 
 
 if __name__ == "__main__":
