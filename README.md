@@ -1,4 +1,4 @@
-# Details
+# Random Scripts
 
 - This is a collection of random scripts I have made since 2021 when I cannot be bothered working on a large scale project
 
