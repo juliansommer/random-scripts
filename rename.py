@@ -16,9 +16,9 @@ root.attributes(
 def open_folder() -> str:
     path_input = filedialog.askdirectory()
 
-    # for whatever reaason, if you do not select a folder the first time, then select one, theres some error so just exit
-    if len(path_input) < 1:  # they didnt select a folder
-        print("Invalid Folder")
+    # if you do not select a folder the first time, then select one, theres some error so just exit
+    if len(path_input) < 1:
+        print("Invalid Folder\n")
         exit()
 
     return path_input

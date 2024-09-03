@@ -1,6 +1,6 @@
 BRACKETS = [18200, 45000, 135000, 190000]
 RATES = [0.16, 0.3, 0.37, 0.45]
-# total ammount paid at each bracket, LUMPS[0] is the total paid between BRACKETS[0] and BRACKETS[1] etc.
+# total amount paid at each bracket, LUMPS[0] is the total paid between BRACKETS[0] and BRACKETS[1] etc.
 LUMPS = [4288, 31288, 51638]
 MEDICARE_RATE = 0.02
 MEDICARE_THRESHOLD = 32500

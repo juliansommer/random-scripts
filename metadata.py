@@ -18,9 +18,9 @@ def select_image() -> str:
     print("Open The Image")
     filename = filedialog.askopenfilenames(filetypes=[("PNG", ".png"), ("JPG", ".jpg")])
 
-    # for whatever reaason, if you do not select a file the first time, then select one, theres some permission error so just exit
+    # if you do not select a file the first time, then select one, theres some error so just exit
     if len(filename) < 1:
-        print("Invalid File")
+        print("Invalid File\n")
         exit()
 
     return "".join(filename)

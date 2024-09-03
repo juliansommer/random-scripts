@@ -15,9 +15,9 @@ def open_file() -> str:
     print("Open the Number List")
     filename = filedialog.askopenfilenames(filetypes=[("Text", ".txt")])
 
-    # for whatever reaason, if you do not select a file the first time, then select one, theres some error so just exit
+    # if you do not select a file the first time, then select one, theres some error so just exit
     if len(filename) < 1:
-        print("Invalid File \n")
+        print("Invalid File\n")
         exit()
 
     return "".join(filename)
