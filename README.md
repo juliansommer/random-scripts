@@ -12,6 +12,3 @@
 - `password.py` will generate a password
 - `prime.py` will find all prime numbers in a txt file
 - `rename.py` will mass rename files
-
-# TODO
-- Add a requirements.txt to install dependencies, potentially look at uv
