@@ -1,13 +1,13 @@
 from typing import Dict, List
 
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
 def make_request(url: str) -> str:
     options = Options()
-    options.headless = True
     driver = webdriver.Chrome(options=options)
     driver.get(url)
     html = driver.page_source
@@ -19,15 +19,19 @@ def parse_visa_info(html_text: str) -> List[Dict[str, str]]:
     rows = soup.find_all("tr", class_="show-tr")
     results = []
     for row in rows:
+        if not isinstance(row, Tag):
+            continue  # Skip if not a Tag
         country_tag = row.find("a")
         visa_tag = row.find(
             "td",
-            class_=lambda x: x
-            and (
-                "vr-bckgr" in x
-                or "vf-bckgr" in x
-                or "voa-bckgr" in x
-                or "eta-bckgr" in x
+            class_=lambda x: bool(
+                x
+                and (
+                    "vr-bckgr" in x
+                    or "vf-bckgr" in x
+                    or "voa-bckgr" in x
+                    or "eta-bckgr" in x
+                )
             ),
         )
         country = country_tag.text.strip() if country_tag else ""

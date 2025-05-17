@@ -2,7 +2,7 @@ import tkinter as tk
 from ctypes import windll
 from tkinter import filedialog
 
-from PIL import Image
+from PIL import Image as PILImage
 from PIL.ExifTags import TAGS
 
 windll.shcore.SetProcessDpiAwareness(1)  # fixes the blurry file dialog
@@ -26,9 +26,9 @@ def select_image() -> str:
     return "".join(filename)
 
 
-def image_data(image: Image) -> None:
+def image_data(image: PILImage.Image, filename: str) -> None:
     info_dict = {
-        "Filename": image.filename,
+        "Filename": filename,
         "Image Size": image.size,
         "Image Height": image.height,
         "Image Width": image.width,
@@ -43,7 +43,7 @@ def image_data(image: Image) -> None:
         print(f"{label:25}: {value}")
 
 
-def exif_data(image: Image) -> None:
+def exif_data(image: PILImage.Image) -> None:
     exif = image.getexif()
 
     if not len(exif) < 1:
@@ -60,8 +60,8 @@ def exif_data(image: Image) -> None:
 
 def main() -> None:
     filename = select_image()
-    image = Image.open(filename)
-    image_data(image)
+    image = PILImage.open(filename)
+    image_data(image, filename)
     exif_data(image)
 
 

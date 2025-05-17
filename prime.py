@@ -31,7 +31,7 @@ def clean_file(filename: str) -> List[str]:
     return startlist
 
 
-def find_prime(startlist: List[str]) -> List[str]:
+def find_prime(startlist: List[str]) -> tuple[List[str], List[str]]:
     prime = []
     nonprime = []
     for i in startlist:
