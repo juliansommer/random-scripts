@@ -3,6 +3,7 @@ import pathlib
 import tkinter as tk
 from ctypes import windll
 from tkinter import filedialog
+from typing import List
 
 windll.shcore.SetProcessDpiAwareness(1)  # fixes the blurry file dialog
 
@@ -24,7 +25,7 @@ def open_folder() -> str:
     return path_input
 
 
-def rename_files(path_input: str, full_list: list, name_input: str) -> None:
+def rename_files(path_input: str, full_list: List[str], name_input: str) -> None:
     for i in range(len(full_list)):
         extension = pathlib.Path(full_list[i]).suffix
         source = os.path.join(path_input, full_list[i])

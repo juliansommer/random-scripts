@@ -1,30 +1,29 @@
-def binary_search(arr: list, target: int, low: int, high: int) -> int:
+from typing import List
+
+
+def binary_search(arr: List[int], target: int) -> int:
+    low = 0
+    high = len(arr) - 1
+
     while low <= high:
-        # find mid point
-        mid = low + (high - low) // 2
+        mid = low + ((high - low) // 2)
 
-        # if we found the index
-        if arr[mid] == target:
-            return mid
+        if arr[mid] > target:
+            high = mid - 1
 
-        # if mid point is less than the number we are too low
         elif arr[mid] < target:
             low = mid + 1
 
-        # if mid point is more than number we are too high
         else:
-            high = mid - 1
+            return mid
 
-    # low > high, meaning item not contained
     return -1
 
 
 def main() -> None:
-    arr = [1, 3, 5, 8, 13, 21]
+    arr = [1, 3, 5, 8, 13, 21, 55, 89, 144, 233]
     target = 8
-    low = 0
-    high = len(arr) - 1
-    result = binary_search(arr, target, low, high)
+    result = binary_search(arr, target)
 
     if result != -1:
         print(f"Element is present at index {result}")
