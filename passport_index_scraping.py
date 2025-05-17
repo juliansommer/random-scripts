@@ -3,12 +3,10 @@ from typing import Dict, List
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 
 def make_request(url: str) -> str:
-    options = Options()
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome()
     driver.get(url)
     html = driver.page_source
     return html
