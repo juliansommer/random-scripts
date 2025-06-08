@@ -22,7 +22,7 @@ def calc_tax(income: int) -> int:
 
     # can pay tax but still not pay medicare levy as medicare threshold > tax free threshold
     # despite how the GOVERNMENTS OWN TAX CALCULATOR WORKS, medicare threshold is also levels based
-    # progress tax rate, but its also based on family income, so this is not included in the calculator
+    # progressive tax rate, but its also based on family income, so this is not included in the calculator
     # https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates
     # if income > MEDICARE_THRESHOLD:
     #     tax += income * MEDICARE_RATE
