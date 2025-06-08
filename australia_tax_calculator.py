@@ -2,8 +2,8 @@ BRACKETS = [18200, 45000, 135000, 190000]
 RATES = [0.16, 0.3, 0.37, 0.45]
 # total amount paid at each bracket, LUMPS[0] is the total paid between BRACKETS[0] and BRACKETS[1] etc.
 LUMPS = [4288, 31288, 51638]
-MEDICARE_RATE = 0.02
-MEDICARE_THRESHOLD = 32500
+# MEDICARE_RATE = 0.02
+# MEDICARE_THRESHOLD = 32500
 
 
 def calc_tax(income: int) -> int:
@@ -21,8 +21,11 @@ def calc_tax(income: int) -> int:
         tax = (income - BRACKETS[0]) * RATES[0]
 
     # can pay tax but still not pay medicare levy as medicare threshold > tax free threshold
-    if income > MEDICARE_THRESHOLD:
-        tax += income * MEDICARE_RATE
+    # despite how the GOVERNMENTS OWN TAX CALCULATOR WORKS, medicare threshold is also levels based
+    # progress tax rate, but its also based on family income, so this is not included in the calculator
+    # https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates
+    # if income > MEDICARE_THRESHOLD:
+    #     tax += income * MEDICARE_RATE
 
     return int(tax)
 
