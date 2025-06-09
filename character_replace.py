@@ -3,7 +3,6 @@ import tkinter as tk
 from ctypes import windll
 from itertools import product
 from tkinter import filedialog
-from typing import List
 
 windll.shcore.SetProcessDpiAwareness(1)  # fixes the blurry file dialog
 
@@ -49,13 +48,13 @@ def select_file() -> str:
     return "".join(filename)
 
 
-def read_file(filename: str) -> List[str]:
+def read_file(filename: str) -> list[str]:
     with open(filename, "r") as f:
         startlist = f.readlines()
         return [x.strip() for x in startlist]
 
 
-def save_file(filename: str, startlist: List[str]) -> None:
+def save_file(filename: str, startlist: list[str]) -> None:
     with open(filename, "w+") as f:
         for word in startlist:
             for newword in filler(word):
@@ -64,7 +63,7 @@ def save_file(filename: str, startlist: List[str]) -> None:
     print(f"Saved to {os.getcwd()}\\{filename}")
 
 
-def filler(word: str) -> List[str]:
+def filler(word: str) -> list[str]:
     combos = [(c,) if c not in OPTIONS else OPTIONS[c] for c in word]
     return list(("".join(o) for o in product(*combos)))
 

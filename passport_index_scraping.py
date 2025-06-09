@@ -1,5 +1,3 @@
-from typing import Dict, List
-
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from selenium import webdriver
@@ -12,7 +10,7 @@ def make_request(url: str) -> str:
     return html
 
 
-def parse_visa_info(html_text: str) -> List[Dict[str, str]]:
+def parse_visa_info(html_text: str) -> list[dict[str, str]]:
     soup = BeautifulSoup(html_text, "html.parser")
     rows = soup.find_all("tr", class_="show-tr")
     results = []
@@ -44,8 +42,8 @@ def parse_visa_info(html_text: str) -> List[Dict[str, str]]:
 
 
 def compare_data(
-    data1: List[Dict[str, str]], data2: List[Dict[str, str]]
-) -> Dict[str, tuple]:
+    data1: list[dict[str, str]], data2: list[dict[str, str]]
+) -> dict[str, tuple]:
     dict1 = {item["country"]: item["visa_status"] for item in data1}
     dict2 = {item["country"]: item["visa_status"] for item in data2}
     differences = {}

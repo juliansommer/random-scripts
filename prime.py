@@ -1,7 +1,6 @@
 import tkinter as tk
 from ctypes import windll
 from tkinter import filedialog
-from typing import List
 
 windll.shcore.SetProcessDpiAwareness(1)  # fixes the blurry file dialog
 
@@ -24,14 +23,14 @@ def open_file() -> str:
     return "".join(filename)
 
 
-def clean_file(filename: str) -> List[str]:
+def clean_file(filename: str) -> list[str]:
     with open(filename, "r") as f:
         startlist = f.readlines()
         startlist = [x.strip() for x in startlist]  # removes spaces
     return startlist
 
 
-def find_prime(startlist: List[str]) -> tuple[List[str], List[str]]:
+def find_prime(startlist: list[str]) -> tuple[list[str], list[str]]:
     prime = []
     nonprime = []
     for i in startlist:
