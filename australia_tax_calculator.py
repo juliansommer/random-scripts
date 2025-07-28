@@ -44,7 +44,10 @@ def main() -> None:
         "Updated for the 1st July 2024 Tax Cuts\nThis calculator only applies to Individual Australian Residents\nThis is only an estimate, even government websites get estimated tax wrong\n"
     )
 
-    print(f"Tax Owed: ${calc_tax(get_income())}")
+    income = get_income()
+    tax = calc_tax(income)
+    print(f"Estimated Tax Owed: ${tax}")
+    print(f"Estimated Take Home Pay: ${income - tax}\n")
 
 
 if __name__ == "__main__":
